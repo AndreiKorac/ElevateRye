@@ -100,9 +100,6 @@ export default class App extends Component {
           Check Now Playing
         </button>
       }
-	  /*
-      <button className = "button" onClick ={this.handleClick}> Click this shit</button>
-	  */
         <p>{JSON.stringify(this.state.username)}</p>
 
     </div>
