@@ -5,7 +5,7 @@ import axios from 'axios';
 class WeatherStatus extends Component{
     constructor(props) {
         super(props);
-
+        
         this.state = {
             weatherData: '',
             latitude: null,
