@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import SpotifyWebApi from 'spotify-web-api-js';
+import geoFindMe from './geoFindMe';
 
 
 const spotifyApi = new SpotifyWebApi();
@@ -22,8 +23,16 @@ export default class App extends Component {
       loggedIn: token ? true : false,
       nowPlaying: { name: 'Not Checked', albumArt: '' },
     };
+	
+	
   };
 
+  componentDidMount(){
+	var loc = geoFindMe();
+	console.log(loc[0],loc[1]);
+	this.getWeatherData(loc[0],loc[1]);
+  };
+  
   getHashParams = () => {
     let hashParams = {};
     let e, r = /([^&;=]+)=?([^&;]*)/g,
@@ -48,8 +57,9 @@ export default class App extends Component {
       });
   };
 
-  handleClick = () => {
-    axios.get('http://api.openweathermap.org/data/2.5/weather?q=Toronto,ca&APPID=7d877d1adb4c82f7649c13fb0071425e')
+  
+  getWeatherData = (lat, lon) => {
+    axios.get(`api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}`)
     .then(response => this.setState({ username: response.data }));
   };
 
@@ -68,7 +78,9 @@ export default class App extends Component {
           Check Now Playing
         </button>
       }
+	  /*
       <button className = "button" onClick ={this.handleClick}> Click this shit</button>
+	  */
         <p>{JSON.stringify(this.state.username)}</p>
 
     </div>
