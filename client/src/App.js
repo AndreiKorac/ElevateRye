@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
-import SpotifyWebApi from 'spotify-web-api-js'; 
-
+import SpotifyWebApi from 'spotify-web-api-js';
+import Dashboard from './components/Dashboard';
+import WeatherStatus from "./components/WeatherStatus";
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -22,14 +22,11 @@ export default class App extends Component {
       nowPlaying: { name: 'Not Checked', albumArt: '' },
       latitude: null,
       longitude: null,
-      loading: false
+      loading: false,
+        songSearch: ''
     };
 	
 	
-  };
-
-  componentDidMount(){
-    this.geoFindMe();
   };
   
   getHashParams = () => {
@@ -56,35 +53,12 @@ export default class App extends Component {
       });
   };
 
-  geoFindMe = () => {
-    if (!navigator.geolocation){
-      console.log("Not Supported");
-      return;
-    }
-    let self = this;
-    function success(position) {
-      let latitude  = position.coords.latitude;
-      let longitude = position.coords.longitude;
-      self.setState({ latitude: latitude, longitude: longitude });
-      self.getWeatherData(latitude, longitude);
-    }
-  
-    function error() {
-      console.log("Unable to retrieve your location");
-    }
-  
-    navigator.geolocation.getCurrentPosition(success, error);
-  }
-
-  getWeatherData = (lat, lon) => {
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=7d877d1adb4c82f7649c13fb0071425e`)
-    .then(response => this.setState({ weatherData: response.data, loading: false }));
-  };
 
   render() {
     return (
       <div className='App'>
-        <a href='http://localhost:8888'> Login to Spotify </a>
+        <a href='http://localhost:8888/login'> Login to Spotify </a>
+        <WeatherStatus/>
         <div>
          Now Playing: { this.state.nowPlaying.name }
        </div>
@@ -92,7 +66,6 @@ export default class App extends Component {
          <img src={this.state.nowPlaying.albumArt} style={{ height: 150 }}/>
        </div>
        {!this.state.loading ? <div>
-        <h4>latitude: {this.state.latitude}, longitude: {this.state.longitude}</h4>
         <h4>{JSON.stringify(this.state.weatherData)}</h4>
        </div> : <h4>Loading...</h4>}
        { this.state.loggedIn &&
@@ -100,8 +73,9 @@ export default class App extends Component {
           Check Now Playing
         </button>
       }
-        <p>{JSON.stringify(this.state.username)}</p>
 
+      <button onClick={()=>this.getMusic()}>Search Songs</button>
+        <p>{JSON.stringify(this.state.username)}</p>
     </div>
     );
   }
