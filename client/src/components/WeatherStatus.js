@@ -10,7 +10,7 @@ class WeatherStatus extends Component{
             weatherData: '',
             latitude: null,
             longitude: null,
-            loading: false
+            loading: true
         };
     }
 
@@ -26,11 +26,12 @@ class WeatherStatus extends Component{
     render(){
         return(
             <div>
-            <h4>latitude: {this.state.latitude}, longitude: {this.state.longitude}</h4>
-                <h4>{this.state.weatherData.weather}</h4>
+                {!this.state.loading ? <div>
+                    <h4>latitude: {this.state.latitude}, longitude: {this.state.longitude}</h4>
+                    <h4>{JSON.stringify(this.state.weatherData.weather[0])}</h4>
+                </div> : null}
             </div>
-
-        )
+        );
     }
 
     geoFindMe = () => {
