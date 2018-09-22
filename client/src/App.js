@@ -21,7 +21,8 @@ export default class App extends Component {
       loggedIn: token ? true : false,
       nowPlaying: { name: 'Not Checked', albumArt: '' },
       latitude: null,
-      longitude: null
+      longitude: null,
+      loading: false
     };
 	
 	
@@ -77,7 +78,7 @@ export default class App extends Component {
 
   getWeatherData = (lat, lon) => {
     axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=7d877d1adb4c82f7649c13fb0071425e`)
-    .then(response => this.setState({ weatherData: response.data }));
+    .then(response => this.setState({ weatherData: response.data, loading: false }));
   };
 
   render() {
@@ -90,8 +91,10 @@ export default class App extends Component {
        <div>
          <img src={this.state.nowPlaying.albumArt} style={{ height: 150 }}/>
        </div>
-       {this.state.latitude && this.state.longitude ? <h4>latitude: {this.state.latitude}, longitude: {this.state.longitude}</h4>: null}
-       {this.state.weatherData ? <h4>{JSON.stringify(this.state.weatherData)}</h4> : null}
+       {!this.state.loading ? <div>
+        <h4>latitude: {this.state.latitude}, longitude: {this.state.longitude}</h4>
+        <h4>{JSON.stringify(this.state.weatherData)}</h4>
+       </div> : <h4>Loading...</h4>}
        { this.state.loggedIn &&
         <button onClick={() => this.getNowPlaying()}>
           Check Now Playing
