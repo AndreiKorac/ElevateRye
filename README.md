@@ -1,13 +1,17 @@
 # To start working, you must start both the server and client
 ## For Server:
+```shell
 cd auth-server
 npm i (If you haven't already done so)
 node authorization_code/app.js
+```
 
 ## To start the client after starting Server 
+```shell
 cd client (From repo root)
 npm i (If you haven't already done so)
 npm start
+```
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
