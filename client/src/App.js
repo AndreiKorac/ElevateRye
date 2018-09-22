@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import SpotifyWebApi from 'spotify-web-api-js';
-import geoFindMe from './geoFindMe';
+import SpotifyWebApi from 'spotify-web-api-js'; 
 
 
 const spotifyApi = new SpotifyWebApi();
@@ -17,20 +16,19 @@ export default class App extends Component {
     if (token) {
       spotifyApi.setAccessToken(token);
     }
-
     this.state = {
-      username: '',
+      weatherData: '',
       loggedIn: token ? true : false,
       nowPlaying: { name: 'Not Checked', albumArt: '' },
+      latitude: null,
+      longitude: null
     };
 	
 	
   };
 
   componentDidMount(){
-	var loc = geoFindMe();
-	console.log(loc[0],loc[1]);
-	this.getWeatherData(loc[0],loc[1]);
+    this.geoFindMe();
   };
   
   getHashParams = () => {
@@ -57,10 +55,29 @@ export default class App extends Component {
       });
   };
 
+  geoFindMe = () => {
+    if (!navigator.geolocation){
+      console.log("Not Supported");
+      return;
+    }
+    let self = this;
+    function success(position) {
+      let latitude  = position.coords.latitude;
+      let longitude = position.coords.longitude;
+      self.setState({ latitude: latitude, longitude: longitude });
+      self.getWeatherData(latitude, longitude);
+    }
   
+    function error() {
+      console.log("Unable to retrieve your location");
+    }
+  
+    navigator.geolocation.getCurrentPosition(success, error);
+  }
+
   getWeatherData = (lat, lon) => {
-    axios.get(`api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}`)
-    .then(response => this.setState({ username: response.data }));
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=7d877d1adb4c82f7649c13fb0071425e`)
+    .then(response => this.setState({ weatherData: response.data }));
   };
 
   render() {
@@ -73,6 +90,8 @@ export default class App extends Component {
        <div>
          <img src={this.state.nowPlaying.albumArt} style={{ height: 150 }}/>
        </div>
+       {this.state.latitude && this.state.longitude ? <h4>latitude: {this.state.latitude}, longitude: {this.state.longitude}</h4>: null}
+       {this.state.weatherData ? <h4>{JSON.stringify(this.state.weatherData)}</h4> : null}
        { this.state.loggedIn &&
         <button onClick={() => this.getNowPlaying()}>
           Check Now Playing

@@ -1,14 +1,14 @@
-function geoFindMe() {
+export default function geoFindMe() {
+  let coordinates = [];
   if (!navigator.geolocation){
     console.log("Not Supported");
     return;
   }
 
   function success(position) {
-    var latitude  = position.coords.latitude;
-    var longitude = position.coords.longitude;
-	console.log(latitude, longitude);
-    return [latitude, longitude];
+    let latitude  = position.coords.latitude;
+    let longitude = position.coords.longitude;
+    this.coordinates = [latitude, longitude];
   }
 
   function error() {
@@ -17,4 +17,3 @@ function geoFindMe() {
 
   navigator.geolocation.getCurrentPosition(success, error);
 }
-export default geoFindMe;
