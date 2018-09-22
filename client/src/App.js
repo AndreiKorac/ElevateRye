@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import SpotifyWebApi from 'spotify-web-api-js';
 import Dashboard from './components/Dashboard';
 import WeatherStatus from "./components/WeatherStatus";
+import MusicPlayer from "./components/MusicPlayer";
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -59,6 +60,7 @@ export default class App extends Component {
       <div className='App'>
         <a href='http://localhost:8888/login'> Login to Spotify </a>
         <WeatherStatus/>
+		<MusicPlayer/>
         <div>
          Now Playing: { this.state.nowPlaying.name }
        </div>
