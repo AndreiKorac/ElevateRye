@@ -22,7 +22,7 @@ export default class Navbar extends Component {
                     <form className="form-inline my-2 my-lg-0">
                         <LocationSearchInput getWeatherData={this.props.getWeatherData} />
                     </form>
-                    <button className="btn btn-danger my-2 my-sm-0" onClick={this.onLogout}>Logout</button>       
+                    <button className="btn btn-danger my-2 my-sm-0" onClick={this.onLogout}>Logout</button>
                 </div>
             </nav>
         );

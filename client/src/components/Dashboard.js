@@ -7,9 +7,9 @@ import MusicPlayer from './MusicPlayer.js';
 import Navbar from './Navbar';
 
 const AlbumArt = styled.img`
-  border-radius: 30%;
+  border-radius: 20%;
   display: inline-block;
-  margin-left:28%;
+  margin-left:38%;
   margin-top:5%;
   margin-bottom:5%;
   height:80%;
