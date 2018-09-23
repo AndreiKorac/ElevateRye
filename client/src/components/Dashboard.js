@@ -20,6 +20,10 @@ const Now = styled.div`
 const ArtBG = styled.div`
   background-color: #1db954;
 `;
+const WStatement = styled.h3`
+  font-family: Ubuntu;
+  text-align:center;
+`;
 const spotifyApi = new SpotifyWebApi();
 
 class Dashboard extends Component{
@@ -143,7 +147,12 @@ class Dashboard extends Component{
                   <Now>
                      Now Playing: { this.state.nowPlaying.name }
                  </Now>
+<<<<<<< Updated upstream
                  <MusicPlayer weatherData={this.state.weatherData}/>
+=======
+                 <WStatement>It's a {this.state.weatherData.weather[0].main.toLowerCase()} day. Enjoy! </WStatement>
+                 <MusicPlayer weatherData= {this.state.weatherData}/>
+>>>>>>> Stashed changes
               </ArtBG>
               </span>
              : <h4>Loading...</h4>}
