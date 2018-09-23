@@ -15,19 +15,19 @@ export default class MusicPlayer extends Component{
         if (temp === "Clear") {
             playlist = "37i9dQZF1DX5Ozry5U6G0d";
             console.log("CLEAR");
-        } else if(temp == "Clouds") {
+        } else if(temp === "Clouds") {
             playlist = "5NZaOHX4B7WXMpin3plCzF";
             console.log("Clouds");
-        } else if(temp == "Snow") {
+        } else if(temp === "Snow") {
             playlist = "37i9dQZF1DX6R7QUWePReA";
             console.log("Snow");
-        } else if(temp == "Thunderstorm") {
+        } else if(temp === "Thunderstorm") {
             playlist = "1rqfUOM7dVvfSQ9TIT1fu5";
             console.log("Thunder");
-        } else if(temp == "Drizzle") {
+        } else if(temp === "Drizzle") {
             playlist = "37i9dQZF1DX9sIqqvKsjG8";
             console.log("Drizzle");
-        } else if(temp == "Rain") {
+        } else if(temp === "Rain") {
             playlist = "37i9dQZF1DX2UgsUIg75Vg";
             console.log("Rain");
         } else {
