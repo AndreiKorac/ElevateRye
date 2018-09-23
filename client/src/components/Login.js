@@ -55,7 +55,7 @@ export default class Login extends Component {
   render() {
     return (
             <LoginForm>
-                <LoginTitle>Login to WeatherMusic</LoginTitle>
+                <LoginTitle>Login to Musiqlo</LoginTitle>
                 <LoginButton className="btn btn-success btn-lg" href="http://localhost:8888/login">Authorize with Spotify</LoginButton>
             </LoginForm>
         );
