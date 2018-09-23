@@ -101,10 +101,11 @@ class Dashboard extends Component{
     const params = this.getHashParams();
     console.log(params);
     const token = params.access_token;
-    console.log("TOKEN",token);
+    console.log('TOKEN', token);
     if (token) {
       spotifyApi.setAccessToken(token);
     }
+
     this.state = {
       weatherData: '',
       loggedIn: token ? true : false,
@@ -122,25 +123,26 @@ class Dashboard extends Component{
       Snow: [SNOWMAN, SNOWWOMAN],
       Fog: [ATMOMAN, ATMOWOMAN],
       Haze: [ATMOMAN, ATMOWOMAN],
-      Rain: [RAINMAN, RAINWOMAN]
-    }
+      Rain: [RAINMAN, RAINWOMAN],
+    };
   }
-  componentDidMount(){
+
+  componentDidMount() {
     this.geoFindMe();
   };
 
   getWeatherData = (lat, lon) => {
-            axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=7d877d1adb4c82f7649c13fb0071425e`)
-            .then(response => {
-              this.setState({ weatherData: response.data, loading: false })
-              console.log(this.state.weatherData);
-          }
-        );
-          };
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=7d877d1adb4c82f7649c13fb0071425e`)
+    .then(response => {
+      this.setState({ weatherData: response.data, loading: false });
+      console.log(this.state.weatherData);
+    }
+    );
+      };
 
   geoFindMe = () => {
         if (!navigator.geolocation) {
-          console.log("Not Supported");
+          console.log('Not Supported');
           return;
         }
 
@@ -174,7 +176,6 @@ class Dashboard extends Component{
   getNowPlaying = () => {
     spotifyApi.getMyCurrentPlaybackState()
       .then((response) => {
-        console.log("RESPONSE: ", response);
         if (response) {
           this.setState({
             nowPlaying: {
@@ -194,7 +195,7 @@ class Dashboard extends Component{
     console.log('Access Token: ', params.access_token);
     console.log('Refresh Token: ', params.refresh_token);
     let config = {
-        headers: {'Authorization': "Bearer " + params.access_token }
+        headers: {'Authorization': 'Bearer' + params.access_token }
       };
     axios.get(`https://api.spotify.com/v1/me`, config)
     .then(response => {
@@ -230,16 +231,16 @@ class Dashboard extends Component{
                         <button class="btn btn-success my-2 my-sm-0" onClick={this.geoFindMe}>Head Home!</button>
                   </form>
                 </TravelBox>
-              <ArtBG>
-                <div className="row">
-                {this.state.nowPlaying.albumArt ? <div class="col-sm-6">
+              <ArtBG className = "row">
+                {this.state.nowPlaying.albumArt ? <div>
                   <AlbumArt src={this.state.nowPlaying.albumArt}/>
-                <Now>
+                <Now className = "call-md-6">
                   <HighlightPlaying>Now Playing:</HighlightPlaying><br/>{ this.state.nowPlaying.name }
                 </Now>
               </div>: null}
-                <MusicPlayer weatherData={this.state.weatherData}/>
-                </div>
+
+                <MusicPlayer className = "call-md-6" weatherData={this.state.weatherData}/>
+
               </ArtBG>
               <br/>
               <WStatement>It's a {this.state.weatherData.weather[0].main.toLowerCase()} day. Here are some sample outfits that can be worn today! </WStatement>

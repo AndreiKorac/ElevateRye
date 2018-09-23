@@ -35,7 +35,7 @@ export default class Login extends Component {
     }
 
     this.state = {
-        loggedIn: token ? true : false
+        loggedIn: token ? true : false,
       };
   }
 
@@ -52,8 +52,8 @@ export default class Login extends Component {
       return hashParams;
     };
 
-    render() {
-        return (
+  render() {
+    return (
             <LoginForm>
                 <LoginTitle>Login to WeatherMusic</LoginTitle>
                 <LoginButton className="btn btn-success btn-lg" href="http://localhost:8888/login">Authorize with Spotify</LoginButton>
