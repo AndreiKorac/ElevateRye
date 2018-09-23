@@ -4,6 +4,7 @@ import WeatherStatus from './WeatherStatus';
 import SpotifyWebApi from 'spotify-web-api-js';
 import styled from 'styled-components';
 import MusicPlayer from './MusicPlayer.js';
+import Navbar from './Navbar';
 
 const AlbumArt = styled.img`
   border-radius: 30%;
@@ -98,7 +99,7 @@ class Dashboard extends Component{
   getNowPlaying = () => {
     spotifyApi.getMyCurrentPlaybackState()
       .then((response) => {
-        console.log(response);
+        console.log("RESPONSE: ", response);
         if (response) {
           this.setState({
             nowPlaying: {
@@ -135,12 +136,14 @@ class Dashboard extends Component{
       this.props.history.push('/');
     };
 
+
   render() {
     return (
 
       <div>
            {!this.state.loading ?
              <span>
+               <Navbar history={this.props.history} getWeatherData={this.getWeatherData}/>
                <WeatherStatus weatherData={this.state.weatherData}/>
               <ArtBG>
                 <AlbumArt src={this.state.nowPlaying.albumArt} style={{ height: 350 }}/>
