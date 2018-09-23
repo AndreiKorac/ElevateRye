@@ -230,16 +230,16 @@ class Dashboard extends Component{
                         <button className="btn btn-success my-2 my-sm-0" onClick={this.geoFindMe}>Head Home!</button>
                   </form>
                 </TravelBox>
-              <ArtBG className = "row">
-                {this.state.nowPlaying.albumArt ? <div>
+              <ArtBG>
+              <div className="row">
+                {this.state.nowPlaying.albumArt ? <div class="col-sm-6">
                   <AlbumArt src={this.state.nowPlaying.albumArt}/>
-                <Now className = "call-md-6">
+                <Now>
                   <HighlightPlaying>Now Playing:</HighlightPlaying><br/>{ this.state.nowPlaying.name }
                 </Now>
               </div>: null}
-
-                <MusicPlayer className = "call-md-6" weatherData={this.state.weatherData}/>
-
+                <MusicPlayer weatherData={this.state.weatherData}/>
+                </div>
               </ArtBG>
               <br/>
               <WStatement>It's a {this.state.weatherData.weather[0].main.toLowerCase()} day. Here are some sample outfits that can be worn today! </WStatement>
