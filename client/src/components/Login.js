@@ -20,7 +20,6 @@ const LoginTitle = styled.h1`
 `;
 
 const LoginButton = styled.a`
-    margin-top: 50px;
     margin-left: 90px;
 `;
 

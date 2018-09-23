@@ -53,8 +53,8 @@ const WStatement = styled.h3`
 `;
 
 const ImageContainer = styled.div`
-  display: block;
-  margin: auto;
+  margin-left: 35vh;
+  margin-right: 0;
 `;
 
 const OutfitImg = styled.img`
@@ -231,7 +231,7 @@ class Dashboard extends Component{
                 <Now><HighlightPlaying>Now Playing:</HighlightPlaying><br/>{ this.state.nowPlaying.name }</Now>
               </ArtBG>
               <br/>
-              <WStatement>It's a {this.state.weatherData.weather[0].main.toLowerCase()} day. Here are some sample outfits you can wear today! </WStatement>
+              <WStatement>It's a {this.state.weatherData.weather[0].main.toLowerCase()} day. Here are some sample outfits that can be worn today! </WStatement>
               <ImageContainer>
                 {this.images[this.state.weatherData.weather[0].main].map((image, key) => {
                   return <OutfitImg key={key} src={image} />
