@@ -39,7 +39,7 @@ class Dashboard extends Component{
       nowPlaying: { name: 'Not Checked', albumArt: '' },
       latitude: null,
       longitude: null,
-      loading: false,
+      loading: true,
       songSearch: '',
     };
 
@@ -130,9 +130,9 @@ class Dashboard extends Component{
     return (
 
 
-
+      <div>
            {!this.state.loading ?
-             <div>
+             <span>
                <WeatherStatus weatherData={this.state.weatherData}/>
               <ArtBG>
                 <AlbumArt src={this.state.nowPlaying.albumArt} style={{ height: 350 }}/>
@@ -140,8 +140,9 @@ class Dashboard extends Component{
                      Now Playing: { this.state.nowPlaying.name }
                  </Now>
               </ArtBG>
-             </div> : <h4>Loading...</h4>}
-
+              </span>
+             : <h4>Loading...</h4>}
+</div>
 
         );
   }
