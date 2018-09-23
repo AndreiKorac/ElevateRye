@@ -39,13 +39,6 @@ export default class Login extends Component {
         };
     }
 
-    componentDidMount() {
-    }
-
-    testNavigation = () => {
-        this.props.history.push("/login");
-    }
-
     getHashParams = () => {
         let hashParams = {};
         let e, r = /([^&;=]+)=?([^&;]*)/g,
