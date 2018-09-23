@@ -6,10 +6,25 @@ import styled from 'styled-components';
 import MusicPlayer from './MusicPlayer.js';
 import Navbar from './Navbar';
 
+import ATMOMAN from '../assets/atmo_man.jpg';
+import ATMOWOMAN from '../assets/atmo_woman.jpg';
+import CLEARMAN from '../assets/clear_man.jpg';
+import CLEARWOMAN from '../assets/clear_woman.jpg';
+import CLOUDMAN from '../assets/cloud_man.jpg';
+import CLOUDWOMAN from '../assets/cloud_woman.jpg';
+import DRIZZLEMAN from '../assets/drizzle_man.jpg';
+import DRIZZLEWOMAN from '../assets/drizzle_woman.jpg';
+import RAINMAN from '../assets/rain_man.jpg';
+import RAINWOMAN from '../assets/rain_woman.jpg';
+import SNOWMAN from '../assets/snow_man.jpg';
+import SNOWWOMAN from '../assets/snow_woman.jpg';
+import THUNDERMAN from '../assets/thunder_man.jpg';
+import THUNDERWOMAN from '../assets/thunder_woman.jpg';
+
 const AlbumArt = styled.img`
-  border-radius: 20%;
+  border-radius: 30%;
   display: inline-block;
-  margin-left:38%;
+  margin-left:28%;
   margin-top:5%;
   margin-bottom:5%;
   height:80%;
@@ -48,6 +63,7 @@ class Dashboard extends Component{
       loading: true,
       songSearch: '',
     };
+
 
   }
   componentDidMount(){
@@ -138,6 +154,7 @@ class Dashboard extends Component{
 
 
   render() {
+    
     return (
 
       <div>
@@ -151,6 +168,7 @@ class Dashboard extends Component{
                      Now Playing: { this.state.nowPlaying.name }
                  </Now>
                  <WStatement>It's a {this.state.weatherData.weather[0].main.toLowerCase()} day. Enjoy! </WStatement>
+                 <img src = {ATMOMAN} />
                  <MusicPlayer weatherData= {this.state.weatherData}/>
               </ArtBG>
               </span>
