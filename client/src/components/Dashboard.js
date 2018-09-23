@@ -95,12 +95,14 @@ class Dashboard extends Component{
     spotifyApi.getMyCurrentPlaybackState()
       .then((response) => {
         console.log(response);
-        this.setState({
-          nowPlaying: {
-              name: response.item.name,
-              albumArt: response.item.album.images[0].url,
-            },
-        });
+        if (response) {
+          this.setState({
+            nowPlaying: {
+                name: response.item.name,
+                albumArt: response.item.album.images[0].url,
+              },
+          });
+        }
       });
   };
 
@@ -116,7 +118,7 @@ class Dashboard extends Component{
       spotifyApi.setAccessToken(params.access_token)
       this.getNowPlaying();
       // SET THIS BACK TO 2 SECONDS FOR THE DEMO
-      let fetchInterval = setInterval(() => this.getNowPlaying(), 60000);
+      let fetchInterval = setInterval(() => this.getNowPlaying(), 10000);
     })
     .catch(error => {
       console.log(error);
