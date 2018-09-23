@@ -5,7 +5,9 @@ import SpotifyWebApi from 'spotify-web-api-js';
 import styled from 'styled-components';
 import MusicPlayer from './MusicPlayer.js';
 import Navbar from './Navbar';
+import LocationSearchInput from './LocationSearchInput';
 
+// Image Imports
 import ATMOMAN from '../assets/atmo_man.jpg';
 import ATMOWOMAN from '../assets/atmo_woman.jpg';
 import CLEARMAN from '../assets/clear_man.jpg';
@@ -20,27 +22,72 @@ import SNOWMAN from '../assets/snow_man.jpg';
 import SNOWWOMAN from '../assets/snow_woman.jpg';
 import THUNDERMAN from '../assets/thunder_man.jpg';
 import THUNDERWOMAN from '../assets/thunder_woman.jpg';
+import spinner from '../assets/bars.svg';
 
 const AlbumArt = styled.img`
   border-radius: 30%;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 5vh;
-  margin-bottom:5%;
+  margin: auto;
+  margin-bottom: 5%;
   height:80%;
+  box-shadow: 0 2 5;
+  border: solid;
+  height: 350px;
 `;
 const Now = styled.div`
   font-family: Ubuntu;
   text-align:center;
+  margin-bottom: 5vh;
+  font-size: 40px;
+  font-weight: bold;
 `;
 const ArtBG = styled.div`
   background-color: #1db954;
+  padding-top: 5vh;
+  padding-bottom: 2vh;
 `;
 const WStatement = styled.h3`
   font-family: Ubuntu;
   text-align:center;
+  color: #5cdb95;
 `;
+
+const ImageContainer = styled.div`
+  display: block;
+  margin: auto;
+`;
+
+const OutfitImg = styled.img`
+  height: 70vh;
+  display: inline-block;
+  margin: auto;
+`;
+
+const TravelBox = styled.div`
+  display: block;
+  margin: auto;
+  max-width: 600px;
+  margin-bottom: 50px;
+`;
+
+const TravelLabel = styled.h2`
+  text-align: center;
+  font-family: Ubuntu;
+  color: #5cdb95;
+`;
+
+const AnimatedLoading = styled.img`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -67.5px;
+  margin-left: -70px;
+`;
+
+const HighlightPlaying = styled.span`
+  color: #FC4445;
+`;
+
 const spotifyApi = new SpotifyWebApi();
 
 class Dashboard extends Component{
@@ -58,12 +105,21 @@ class Dashboard extends Component{
     this.state = {
       weatherData: '',
       loggedIn: token ? true : false,
-      nowPlaying: { name: 'Not Checked', albumArt: '' },
+      nowPlaying: { name: 'Music is not playing!', albumArt: '' },
       latitude: null,
       longitude: null,
       loading: true,
       songSearch: '',
     };
+    this.images = {
+      Clear: [CLEARMAN, CLEARWOMAN],
+      Clouds: [CLOUDMAN, CLOUDWOMAN],
+      Drizzle: [DRIZZLEMAN, DRIZZLEWOMAN],
+      Thunder: [THUNDERMAN, THUNDERWOMAN],
+      Snow: [SNOWMAN, SNOWWOMAN],
+      Atmo: [ATMOMAN, ATMOWOMAN],
+      Rain: [RAINMAN, RAINWOMAN]
+    }
   }
   componentDidMount(){
     this.geoFindMe();
@@ -74,7 +130,6 @@ class Dashboard extends Component{
             .then(response => {
               this.setState({ weatherData: response.data, loading: false })
               console.log(this.state.weatherData);
-              console.log(this.images[this.state.weatherData.weather[0].main][0]); 
           }
         );
           };
@@ -127,7 +182,6 @@ class Dashboard extends Component{
       })
       .catch(e => {
         console.log(e);
-        this.props.history.push('/');
       })
   };
 
@@ -143,7 +197,7 @@ class Dashboard extends Component{
       spotifyApi.setAccessToken(params.access_token)
       this.getNowPlaying();
       // SET THIS BACK TO 2 SECONDS FOR THE DEMO
-      let fetchInterval = setInterval(() => this.getNowPlaying(), 10000);
+      setInterval(() => this.getNowPlaying(), 10000);
     })
     .catch(error => {
       console.log(error);
@@ -164,18 +218,28 @@ class Dashboard extends Component{
            {!this.state.loading ?
              <span>
                <Navbar history={this.props.history} getWeatherData={this.getWeatherData} geoFindMe={this.geoFindMe}/>
-               <WeatherStatus weatherData={this.state.weatherData}/>
+                <WeatherStatus weatherData={this.state.weatherData}/>
+                <TravelLabel>Local weather too gloomy? Take a virtual trip!</TravelLabel>
+                <TravelBox>
+                  <form className="form-inline my-2 my-lg-0">
+                        <LocationSearchInput getWeatherData={this.getWeatherData} />
+                        <button class="btn btn-success my-2 my-sm-0" onClick={this.geoFindMe}>Head Home!</button>
+                  </form>
+                </TravelBox>
               <ArtBG>
-                <AlbumArt src={this.state.nowPlaying.albumArt} style={{ height: 350 }}/>
-                  <Now>
-                     Now Playing: { this.state.nowPlaying.name }
-                 </Now>
-                 <WStatement>It's a {this.state.weatherData.weather[0].main.toLowerCase()} day. Enjoy! </WStatement>
-                 <img src = {ATMOMAN} />
-                 <MusicPlayer weatherData= {this.state.weatherData}/>
+                {this.state.nowPlaying.albumArt ? <AlbumArt src={this.state.nowPlaying.albumArt}/> : null}
+                <Now><HighlightPlaying>Now Playing:</HighlightPlaying><br/>{ this.state.nowPlaying.name }</Now>
               </ArtBG>
+              <br/>
+              <WStatement>It's a {this.state.weatherData.weather[0].main.toLowerCase()} day. Here are some sample outfits you can wear today! </WStatement>
+              <ImageContainer>
+                {this.images[this.state.weatherData.weather[0].main].map((image, key) => {
+                  return <OutfitImg key={key} src={image} />
+                })}
+                </ImageContainer>
+                <MusicPlayer weatherData={this.state.weatherData}/>
               </span>
-             : <h4>Loading...</h4>}
+             : <AnimatedLoading src={spinner}></AnimatedLoading>}
 </div>
 
         );

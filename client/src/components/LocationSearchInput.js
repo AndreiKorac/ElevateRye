@@ -1,8 +1,17 @@
 import React from 'react';
+import styled from 'styled-components';
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
+
+const SearchInput = styled.input`
+  width: 400px !important;
+`;
+
+const Results = styled.div`
+  width: 400px !important;
+`;
 
 export default class LocationSearchInput extends React.Component {
   constructor(props) {
@@ -34,13 +43,13 @@ export default class LocationSearchInput extends React.Component {
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div>
-            <input
+            <SearchInput
               {...getInputProps({
                 placeholder: 'Take a Journey ...',
                 className: 'form-control mr-sm-2',
               })}
             />
-            <div className="autocomplete-dropdown-container">
+            <Results className="autocomplete-dropdown-container">
               {loading && <div>Loading...</div>}
               {suggestions.map(suggestion => {
                 const className = suggestion.active
@@ -61,7 +70,7 @@ export default class LocationSearchInput extends React.Component {
                   </div>
                 );
               })}
-            </div>
+            </Results>
           </div>
         )}
       </PlacesAutocomplete>
