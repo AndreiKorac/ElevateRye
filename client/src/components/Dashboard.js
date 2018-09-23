@@ -91,6 +91,11 @@ const HighlightPlaying = styled.span`
   color: #FC4445;
 `;
 
+const SpotifyInfo = styled.div`
+  // display: block;
+  // margin: auto;
+`;
+
 const spotifyApi = new SpotifyWebApi();
 
 class Dashboard extends Component{
@@ -230,16 +235,16 @@ class Dashboard extends Component{
                         <button class="btn btn-success my-2 my-sm-0" onClick={this.geoFindMe}>Head Home!</button>
                   </form>
                 </TravelBox>
-              <ArtBG className = "row">
-                {this.state.nowPlaying.albumArt ? <div>
+              <ArtBG>
+                <SpotifyInfo className="row">
+                {this.state.nowPlaying.albumArt ? <div class="col">
                   <AlbumArt src={this.state.nowPlaying.albumArt}/>
-                <Now className = "call-md-6">
+                <Now>
                   <HighlightPlaying>Now Playing:</HighlightPlaying><br/>{ this.state.nowPlaying.name }
                 </Now>
               </div>: null}
-
-                <MusicPlayer className = "call-md-6" weatherData={this.state.weatherData}/>
-
+                <MusicPlayer weatherData={this.state.weatherData}/>
+                </SpotifyInfo>
               </ArtBG>
               <br/>
               <WStatement>It's a {this.state.weatherData.weather[0].main.toLowerCase()} day. Here are some sample outfits that can be worn today! </WStatement>

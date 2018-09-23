@@ -47,7 +47,7 @@ export default class MusicPlayer extends Component{
 
     render() {
         return (
-            <div>{this.renderPlayer()}</div>
+            <div className="col">{this.renderPlayer()}</div>
         );
     }
 }
