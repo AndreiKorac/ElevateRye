@@ -117,7 +117,8 @@ class Dashboard extends Component{
       Drizzle: [DRIZZLEMAN, DRIZZLEWOMAN],
       Thunder: [THUNDERMAN, THUNDERWOMAN],
       Snow: [SNOWMAN, SNOWWOMAN],
-      Atmo: [ATMOMAN, ATMOWOMAN],
+      Fog: [ATMOMAN, ATMOWOMAN],
+      Haze: [ATMOMAN, ATMOWOMAN],
       Rain: [RAINMAN, RAINWOMAN]
     }
   }

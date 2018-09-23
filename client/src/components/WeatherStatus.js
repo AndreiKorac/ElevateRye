@@ -19,6 +19,7 @@ const Location = styled.h3`
 class WeatherStatus extends Component{
 
   render() {
+    console.log(this.props.weatherData.weather[0].main);
     return (
         <WeatherCard>
                 <Location>{this.props.weatherData.name} Weather</Location>
