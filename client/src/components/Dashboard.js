@@ -185,7 +185,7 @@ class Dashboard extends Component{
           });
         }
       })
-      .catch(e => {
+      .catch(e  => {
         console.log(e);
       })
   };
@@ -232,7 +232,7 @@ class Dashboard extends Component{
                 </TravelBox>
               <ArtBG>
               <div className="row">
-                {this.state.nowPlaying.albumArt ? <div class="col-sm-6">
+                {this.state.nowPlaying.albumArt ? <div className="col-sm-6">
                   <AlbumArt src={this.state.nowPlaying.albumArt}/>
                 <Now>
                   <HighlightPlaying>Now Playing:</HighlightPlaying><br/>{ this.state.nowPlaying.name }
