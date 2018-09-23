@@ -195,7 +195,7 @@ class Dashboard extends Component{
     console.log('Access Token: ', params.access_token);
     console.log('Refresh Token: ', params.refresh_token);
     let config = {
-        headers: {'Authorization': 'Bearer' + params.access_token }
+        headers: {'Authorization': 'Bearer ' + params.access_token }
       };
     axios.get(`https://api.spotify.com/v1/me`, config)
     .then(response => {
@@ -206,7 +206,6 @@ class Dashboard extends Component{
     })
     .catch(error => {
       console.log(error);
-      this.props.history.push('/login');
     });
   };
 
@@ -228,7 +227,7 @@ class Dashboard extends Component{
                 <TravelBox>
                   <form className="form-inline my-2 my-lg-0">
                         <LocationSearchInput getWeatherData={this.getWeatherData} />
-                        <button class="btn btn-success my-2 my-sm-0" onClick={this.geoFindMe}>Head Home!</button>
+                        <button className="btn btn-success my-2 my-sm-0" onClick={this.geoFindMe}>Head Home!</button>
                   </form>
                 </TravelBox>
               <ArtBG className = "row">
