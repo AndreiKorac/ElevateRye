@@ -115,15 +115,15 @@ class Dashboard extends Component{
       loading: true,
       songSearch: '',
     };
-    this.images = {
-      Clear: [CLEARMAN, CLEARWOMAN],
-      Clouds: [CLOUDMAN, CLOUDWOMAN],
-      Drizzle: [DRIZZLEMAN, DRIZZLEWOMAN],
-      Thunder: [THUNDERMAN, THUNDERWOMAN],
-      Snow: [SNOWMAN, SNOWWOMAN],
-      Fog: [ATMOMAN, ATMOWOMAN],
-      Haze: [ATMOMAN, ATMOWOMAN],
-      Rain: [RAINMAN, RAINWOMAN],
+    this.weatherInfo = {
+      Clear: ["clear", CLEARMAN, CLEARWOMAN],
+      Clouds: ["cloudy", CLOUDMAN, CLOUDWOMAN],
+      Drizzle: ["drizzy", DRIZZLEMAN, DRIZZLEWOMAN],
+      Thunder: ["thunderous",THUNDERMAN, THUNDERWOMAN],
+      Snow: ["snowy", SNOWMAN, SNOWWOMAN],
+      Fog: ["foggy", ATMOMAN, ATMOWOMAN],
+      Haze: ["hazy", ATMOMAN, ATMOWOMAN],
+      Rain: ["rainy", RAINMAN, RAINWOMAN],
     };
   }
 
@@ -202,7 +202,7 @@ class Dashboard extends Component{
       spotifyApi.setAccessToken(params.access_token)
       this.getNowPlaying();
       // SET THIS BACK TO 2 SECONDS FOR THE DEMO
-      setInterval(() => this.getNowPlaying(), 10000);
+      setInterval(() => this.getNowPlaying(), 2000);
     })
     .catch(error => {
       console.log(error);
@@ -242,10 +242,12 @@ class Dashboard extends Component{
                 </div>
               </ArtBG>
               <br/>
-              <WStatement>It's a {this.state.weatherData.weather[0].main.toLowerCase()} day. Here are some sample outfits that can be worn today! </WStatement>
+              <WStatement>It's a {this.weatherInfo[this.state.weatherData.weather[0].main][0]} day. Here are some sample outfits that can be worn today! </WStatement>
               <ImageContainer>
-                {this.images[this.state.weatherData.weather[0].main].map((image, key) => {
-                  return <OutfitImg key={key} src={image} />
+                {this.weatherInfo[this.state.weatherData.weather[0].main].map((image, key) => {
+                  if (key > 0) {
+                    return <OutfitImg key={key} src={image} />
+                  }
                 })}
                 </ImageContainer>
               </span>
