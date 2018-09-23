@@ -26,10 +26,10 @@ export default class App extends Component {
       loading: false,
         songSearch: ''
     };
-	
-	
+
+
   };
-  
+
   getHashParams = () => {
     let hashParams = {};
     let e, r = /([^&;=]+)=?([^&;]*)/g,
