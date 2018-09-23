@@ -115,6 +115,8 @@ class Dashboard extends Component{
     .then(response => {
       spotifyApi.setAccessToken(params.access_token)
       this.getNowPlaying();
+      // SET THIS BACK TO 2 SECONDS FOR THE DEMO
+      let fetchInterval = setInterval(() => this.getNowPlaying(), 60000);
     })
     .catch(error => {
       console.log(error);
@@ -139,7 +141,7 @@ class Dashboard extends Component{
                   <Now>
                      Now Playing: { this.state.nowPlaying.name }
                  </Now>
-                 <MusicPlayer weatherData= {this.state.weatherData}/>
+                 <MusicPlayer weatherData={this.state.weatherData}/>
               </ArtBG>
               </span>
              : <h4>Loading...</h4>}
