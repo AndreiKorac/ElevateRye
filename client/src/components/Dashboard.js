@@ -45,6 +45,7 @@ const ArtBG = styled.div`
   background-color: #1db954;
   padding-top: 5vh;
   padding-bottom: 2vh;
+  flex-direction:row;
 `;
 const WStatement = styled.h3`
   font-family: Ubuntu;
@@ -55,6 +56,7 @@ const WStatement = styled.h3`
 const ImageContainer = styled.div`
   margin-left: 35vh;
   margin-right: 0;
+  margin-bottom:5 vh;
 `;
 
 const OutfitImg = styled.img`
@@ -73,6 +75,7 @@ const TravelBox = styled.div`
 const TravelLabel = styled.h2`
   text-align: center;
   font-family: Ubuntu;
+
   color: #5cdb95;
 `;
 
@@ -227,9 +230,16 @@ class Dashboard extends Component{
                         <button class="btn btn-success my-2 my-sm-0" onClick={this.geoFindMe}>Head Home!</button>
                   </form>
                 </TravelBox>
-              <ArtBG>
-                {this.state.nowPlaying.albumArt ? <AlbumArt src={this.state.nowPlaying.albumArt}/> : null}
-                <Now><HighlightPlaying>Now Playing:</HighlightPlaying><br/>{ this.state.nowPlaying.name }</Now>
+              <ArtBG className = "row">
+                {this.state.nowPlaying.albumArt ? <div>
+                  <AlbumArt src={this.state.nowPlaying.albumArt}/>
+                <Now className = "call-md-6">
+                  <HighlightPlaying>Now Playing:</HighlightPlaying><br/>{ this.state.nowPlaying.name }
+                </Now>
+              </div>: null}
+
+                <MusicPlayer className = "call-md-6" weatherData={this.state.weatherData}/>
+
               </ArtBG>
               <br/>
               <WStatement>It's a {this.state.weatherData.weather[0].main.toLowerCase()} day. Here are some sample outfits that can be worn today! </WStatement>
@@ -238,7 +248,6 @@ class Dashboard extends Component{
                   return <OutfitImg key={key} src={image} />
                 })}
                 </ImageContainer>
-                <MusicPlayer weatherData={this.state.weatherData}/>
               </span>
              : <AnimatedLoading src={spinner}></AnimatedLoading>}
 </div>

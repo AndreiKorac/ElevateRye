@@ -3,7 +3,13 @@ import styled from 'styled-components';
 
 const EmbedSpotify = styled.iframe`
 	display: block;
-	margin: auto;
+	margin:auto;
+
+
+`;
+const PlaylistBG = styled.div`
+	background-color:#1db954;
+	padding:2%;
 `;
 
 export default class MusicPlayer extends Component{
@@ -35,7 +41,8 @@ export default class MusicPlayer extends Component{
             console.log("Atmosphere (Fog and Mist)");
         }
 
-        return <EmbedSpotify src={"https://open.spotify.com/embed/user/spotify/playlist/" + playlist} width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></EmbedSpotify>;
+        return <PlaylistBG><EmbedSpotify src={"https://open.spotify.com/embed/user/spotify/playlist/" + playlist} width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></EmbedSpotify>
+				</PlaylistBG>;
     }
 
     render() {

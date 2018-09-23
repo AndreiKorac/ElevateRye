@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const WeatherCard = styled.div`
   display: block;
   border-radius: 50px;
-  margin: 5%;
+  margin: 1%;
   background-color: #fff;
   padding: 2%;
   font-family: Ubuntu;
@@ -19,7 +19,6 @@ const Location = styled.h3`
 class WeatherStatus extends Component{
 
   render() {
-    console.log(this.props.weatherData.weather[0].main);
     return (
         <WeatherCard>
                 <Location>{this.props.weatherData.name} Weather</Location>
