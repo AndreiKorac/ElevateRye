@@ -27,29 +27,31 @@ const LoginButton = styled.a`
 const spotifyApi = new SpotifyWebApi();
 
 export default class Login extends Component {
-    constructor(props) {
-        super(props);
-        const params = this.getHashParams();
-        const token = params.access_token;
-        if (token) {
-            spotifyApi.setAccessToken(token);
-        }
-        this.state = {
-            loggedIn: token ? true : false
-        };
+  constructor(props) {
+    super(props);
+    const params = this.getHashParams();
+    const token = params.access_token;
+    if (token) {
+      spotifyApi.setAccessToken(token);
     }
 
-    getHashParams = () => {
-        let hashParams = {};
-        let e, r = /([^&;=]+)=?([^&;]*)/g,
-            q = window.location.hash.substring(1);
-        e = r.exec(q);
-        while (e) {
-          hashParams[e[1]] = decodeURIComponent(e[2]);
-          e = r.exec(q);
-        }
-        return hashParams;
+    this.state = {
+        loggedIn: token ? true : false
       };
+  }
+
+  getHashParams = () => {
+      let hashParams = {};
+      let e, r = /([^&;=]+)=?([^&;]*)/g,
+          q = window.location.hash.substring(1);
+      e = r.exec(q);
+      while (e) {
+        hashParams[e[1]] = decodeURIComponent(e[2]);
+        e = r.exec(q);
+      }
+
+      return hashParams;
+    };
 
     render() {
         return (
