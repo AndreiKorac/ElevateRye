@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import WeatherStatus from './WeatherStatus';
+import MusicPlayer from "./MusicPlayer";
 
 
 class Dashboard extends Component{
@@ -29,6 +30,7 @@ class Dashboard extends Component{
         return(
             <div>
                 <WeatherStatus />
+				<MusicPlayer />
             </div>
         )
     }
