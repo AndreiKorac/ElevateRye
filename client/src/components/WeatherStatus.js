@@ -25,11 +25,15 @@ class WeatherStatus extends Component{
 
     render(){
         return(
-            <div>
-                {!this.state.loading ? <div>
-                    <h4>latitude: {this.state.latitude}, longitude: {this.state.longitude}</h4>
-                    <h4>{JSON.stringify(this.state.weatherData.weather[0])}</h4>
-                </div> : null}
+            <div className="container card card-body">
+                <div className="row center">
+                    <div className="center col-md-12">
+                        {!this.state.loading ? <div className="text-center">
+                            <h4>latitude: {this.state.latitude}, longitude: {this.state.longitude}</h4>
+                            <h4>The weather is: {this.state.weatherData.weather[0].main}</h4>
+                        </div> : null}
+                    </div>
+                </div>
             </div>
         );
     }
