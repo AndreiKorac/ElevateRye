@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import PlacesAutocomplete from 'react-places-autocomplete';
-import { geocodeByAddress, geocodeByPlaceId, getLatLng } from 'react-places-autocomplete';
 import LocationSearchInput from './LocationSearchInput';
 
 export default class Navbar extends Component {
@@ -21,6 +19,7 @@ export default class Navbar extends Component {
                     <ul className="navbar-nav mr-auto" />
                     <form className="form-inline my-2 my-lg-0">
                         <LocationSearchInput getWeatherData={this.props.getWeatherData} />
+                        <button class="btn btn-success my-2 my-sm-0" onClick={this.props.geoFindMe}>Head Home!</button>
                     </form>
                     <button className="btn btn-danger my-2 my-sm-0" onClick={this.onLogout}>Logout</button>
                 </div>

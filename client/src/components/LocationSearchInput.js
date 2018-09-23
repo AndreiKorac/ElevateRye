@@ -20,6 +20,7 @@ export default class LocationSearchInput extends React.Component {
       .then(latLng => {
         console.log('Success', latLng);
         this.props.getWeatherData(latLng.lat, latLng.lng);
+        this.setState({ address: '' });
       })
       .catch(error => console.error('Error', error));
   };
@@ -35,8 +36,8 @@ export default class LocationSearchInput extends React.Component {
           <div>
             <input
               {...getInputProps({
-                placeholder: 'Search Places ...',
-                className: 'location-search-input',
+                placeholder: 'Take a Journey ...',
+                className: 'form-control mr-sm-2',
               })}
             />
             <div className="autocomplete-dropdown-container">

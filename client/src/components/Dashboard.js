@@ -23,9 +23,10 @@ import THUNDERWOMAN from '../assets/thunder_woman.jpg';
 
 const AlbumArt = styled.img`
   border-radius: 30%;
-  display: inline-block;
-  margin-left:28%;
-  margin-top:5%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5vh;
   margin-bottom:5%;
   height:80%;
 `;
@@ -63,8 +64,6 @@ class Dashboard extends Component{
       loading: true,
       songSearch: '',
     };
-
-
   }
   componentDidMount(){
     this.geoFindMe();
@@ -75,6 +74,7 @@ class Dashboard extends Component{
             .then(response => {
               this.setState({ weatherData: response.data, loading: false })
               console.log(this.state.weatherData);
+              console.log(this.images[this.state.weatherData.weather[0].main][0]); 
           }
         );
           };
@@ -124,7 +124,11 @@ class Dashboard extends Component{
               },
           });
         }
-      });
+      })
+      .catch(e => {
+        console.log(e);
+        this.props.history.push('/');
+      })
   };
 
   confirmAuthentication = () => {
@@ -149,18 +153,17 @@ class Dashboard extends Component{
 
   onLogout = () => {
       // Soft logout
-      this.props.history.push('/');
-    };
+        this.props.history.push('/');
+      };
 
 
-  render() {
-    
-    return (
+    render() {
+      return (
 
       <div>
            {!this.state.loading ?
              <span>
-               <Navbar history={this.props.history} getWeatherData={this.getWeatherData}/>
+               <Navbar history={this.props.history} getWeatherData={this.getWeatherData} geoFindMe={this.geoFindMe}/>
                <WeatherStatus weatherData={this.state.weatherData}/>
               <ArtBG>
                 <AlbumArt src={this.state.nowPlaying.albumArt} style={{ height: 350 }}/>
