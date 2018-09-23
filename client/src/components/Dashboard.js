@@ -3,6 +3,7 @@ import axios from 'axios';
 import WeatherStatus from './WeatherStatus';
 import SpotifyWebApi from 'spotify-web-api-js';
 import styled from 'styled-components';
+import MusicPlayer from './MusicPlayer.js';
 
 const AlbumArt = styled.img`
   border-radius: 30%;
@@ -129,7 +130,6 @@ class Dashboard extends Component{
   render() {
     return (
 
-
       <div>
            {!this.state.loading ?
              <span>
@@ -139,6 +139,7 @@ class Dashboard extends Component{
                   <Now>
                      Now Playing: { this.state.nowPlaying.name }
                  </Now>
+                 <MusicPlayer weatherData= {this.state.weatherData}/>
               </ArtBG>
               </span>
              : <h4>Loading...</h4>}
