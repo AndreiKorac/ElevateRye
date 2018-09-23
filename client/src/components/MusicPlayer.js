@@ -3,9 +3,8 @@ import styled from 'styled-components';
 
 const EmbedSpotify = styled.iframe`
 	display: block;
-	margin:auto;
-
-
+    margin:auto;
+    border: solid;
 `;
 const PlaylistBG = styled.div`
 	background-color:#1db954;
